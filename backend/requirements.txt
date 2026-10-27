@@ -1,0 +1,17 @@
+# Runtime dependencies for the Real Estate GPT API.
+#
+# Supported Python: 3.12 or 3.13 are the safest choices. Python 3.14 needs the newer minimum versions below
+# (older pydantic-core / SQLAlchemy releases ship no Python 3.14 wheels and fail to install on Windows without a
+# Rust toolchain). The ranges are deliberately open-ended upward so pip picks versions that have wheels for YOUR Python.
+fastapi>=0.115.6,<1
+starlette>=0.48.0,<2
+uvicorn>=0.32.1,<1
+SQLAlchemy>=2.0.44,<2.1
+alembic>=1.14.0,<2
+PyMySQL>=1.1.1,<2
+cryptography>=43.0.3
+pydantic>=2.12.0,<3
+pydantic-settings>=2.10.0,<3
+email-validator>=2.2.0,<3
+bcrypt>=4.2.1,<6
+PyJWT>=2.10.1,<3

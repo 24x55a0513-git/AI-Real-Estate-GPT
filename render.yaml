@@ -1,0 +1,23 @@
+# Render Blueprint (https://render.com/docs/blueprint-spec). Review plan/pricing on Render before deploying.
+services:
+  - type: web
+    name: real-estate-gpt-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    # Runs migrations, then starts the API on the host/port Render assigns.
+    startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false        # paste your managed MySQL URL: mysql+pymysql://USER:PASS@HOST:PORT/DB?charset=utf8mb4
+      - key: CORS_ORIGINS
+        sync: false        # e.g. https://your-app.vercel.app (exact origin, no trailing slash)
+      - key: CORS_ORIGIN_REGEX
+        value: ""          # optional, e.g. preview URLs; never .*
